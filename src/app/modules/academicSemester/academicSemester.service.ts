@@ -1,0 +1,36 @@
+import { IGenericResponse } from '../../../interfaces/common';
+import { CoreService as HttpService } from '../../../shared/axios';
+import { Request } from 'express';
+const createSemester = async (req: Request): Promise<IGenericResponse> => {
+  const response: IGenericResponse = await HttpService.post('/academic-semesters', req.body, {
+    headers: {
+      Authorization: req.headers.authorization
+    }
+  });
+  return response;
+};
+const getAllSemester = async (req: Request): Promise<IGenericResponse> => {
+  const response: IGenericResponse = await HttpService.get('/academic-semesters', {
+    params: req.query,
+    headers: {
+      Authorization: req.headers.authorization
+    }
+  });
+  return response;
+};
+const getSingleSemester = async (req: Request): Promise<IGenericResponse> => {
+    const { id } = req.params;
+  const response: IGenericResponse = await HttpService.get(`/academic-semesters/${id}`, {
+    params: req.params,
+    headers: {
+      Authorization: req.headers.authorization
+    }
+  });
+  return response;
+};
+
+export const AcademicSemesterService = {
+  createSemester,
+  getAllSemester,
+  getSingleSemester
+};
