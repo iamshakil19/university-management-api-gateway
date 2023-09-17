@@ -19,9 +19,32 @@ const getAllSemester = async (req: Request): Promise<IGenericResponse> => {
   return response;
 };
 const getSingleSemester = async (req: Request): Promise<IGenericResponse> => {
-    const { id } = req.params;
+  const { id } = req.params;
   const response: IGenericResponse = await HttpService.get(`/academic-semesters/${id}`, {
-    params: req.params,
+    headers: {
+      Authorization: req.headers.authorization
+    }
+  });
+  return response;
+};
+
+const updateSemester = async (req: Request): Promise<IGenericResponse> => {
+  const { id } = req.params;
+  const response: IGenericResponse = await HttpService.patch(
+    `/academic-semesters/${id}`,
+    req.body,
+    {
+      headers: {
+        Authorization: req.headers.authorization
+      }
+    }
+  );
+  return response;
+};
+
+const deleteSemester = async (req: Request): Promise<IGenericResponse> => {
+  const { id } = req.params;
+  const response: IGenericResponse = await HttpService.delete(`/academic-semesters/${id}`, {
     headers: {
       Authorization: req.headers.authorization
     }
@@ -32,5 +55,7 @@ const getSingleSemester = async (req: Request): Promise<IGenericResponse> => {
 export const AcademicSemesterService = {
   createSemester,
   getAllSemester,
-  getSingleSemester
+  getSingleSemester,
+  updateSemester,
+  deleteSemester
 };
