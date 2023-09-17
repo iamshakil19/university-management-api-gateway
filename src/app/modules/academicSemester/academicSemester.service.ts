@@ -45,8 +45,6 @@ const updateSemester = async (req: Request): Promise<IGenericResponse> => {
 
 const deleteSemester = async (req: Request): Promise<IGenericResponse> => {
   const { id } = req.params;
-  console.log(req);
-
   const response: IGenericResponse = await HttpService.delete(`/academic-semesters/${id}`, {
     headers: {
       Authorization: req.headers.authorization
