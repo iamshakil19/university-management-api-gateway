@@ -39,6 +39,8 @@ const updateSemester = async (req: Request, res: Response, next: NextFunction) =
 };
 
 const deleteSemester = async (req: Request, res: Response, next: NextFunction) => {
+  console.log('hit');
+  
   try {
     const result = await AcademicSemesterService.deleteSemester(req);
     sendResponse(res, result);
